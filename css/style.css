@@ -1,0 +1,390 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+/* Navbar -------------------------------------------------------- */
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color: #E5EAE6;
+    padding: 15px 0px 15px 0px;
+    position: relative;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    z-index: 3;
+}
+
+.nav-links{
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+}
+
+.nav-links a{
+    color: black;
+}
+
+.burger{
+    display: none;
+    cursor: pointer;
+}
+.burger div{
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width:900px){
+    body{
+        overflow-x: hidden;
+    }
+    .nav-links{
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background-color: #E5EAE6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+    .nav-links li{
+        opacity: 0;
+    }
+    .nav-links a{
+        color: black;
+    }
+    .burger{
+        display: block;
+    }
+}
+
+.nav-active{
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+.toggle .line1{
+    transform: rotate(-45deg) translate(-5px,6px);
+}
+.toggle .line2{
+    opacity: 0;
+}
+.toggle .line3{
+    transform: rotate(45deg) translate(-5px,-6px);
+}
+/* INDEX ------------------------------------------------------------------*/
+
+.bg{
+    background: url("../images/Rozenmuur.jpg");
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    height: 100%;
+    filter: blur(8px);
+    z-index: -1;
+    -webkit-filter: blur(8px);
+    
+}    
+
+.wrapper {
+    display: grid;
+    
+    align-items: center;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(100px, auto);
+    grid-column-gap: 6em;
+    height: 90vh;
+    color: white;
+}
+
+.images{
+    border: 1px solid black;
+}
+
+.grid1{
+    padding: 0px 150px 0px 180px;
+    
+}
+
+.grid2{
+    text-align: center;
+    
+}
+
+.grid3{
+    text-align: center;
+}
+
+.grid4{
+    padding: 0px 150px 0px 180px;
+}
+
+/* OVER ONS ------------------------------------------------------------------*/
+.wrapper2{
+    display: grid;
+    /* align-items: center; */
+    position: relative;
+    grid-template-columns: 1fr;
+    /* grid-auto-rows: minmax(100px, auto); */
+    color: black;
+}
+
+.gridbox > h1{
+    text-align: center;
+    padding-top: 100px;
+}
+
+.gridbox > p{
+    text-align: center;
+    padding: 20px 650px 100px 650px;
+    border-bottom: 1px solid black;
+    text-size-adjust: none;
+}
+
+.gridbox1{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto ;
+    grid-template-areas: 
+        "header header"
+        "image content1";
+}
+
+.headerbox{
+    padding: 20px 0px 60px 0px;
+    grid-area: header;
+    text-align: center;
+}
+.imagebox{
+    text-align: center;
+    grid-area: image;
+    padding: 40px 0px 70px 0px;
+}
+.headerbox1{
+    text-align: center;
+    grid-area: content1;
+    padding: 40px 280px 70px 280px;
+}
+
+.gridbox2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto ;
+    grid-template-areas: 
+        "header header"
+        "image content1";
+}
+.headerbox2{
+    border-top: 1px solid black;
+    padding: 20px 0px 60px 0px;
+    grid-area: header;
+    text-align: center;
+}
+.contentbox1{
+    /* text-align: center; */
+    grid-area: image;
+    padding: 40px 280px 70px 280px;
+}
+.contentbox2{
+    text-align: center;
+    grid-area: content1;
+    padding: 40px 280px 70px 280px;
+}
+
+/* SINGUP ---------------------------------------------------------------*/
+.bg1{
+    background: url("../images/Login.jpg");
+    position: absolute;
+    display: block;
+    left: 0;
+    right: 0;
+    height: 920px;
+    filter: blur(6px);
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-filter: blur(6px);
+    
+}  
+
+.signup-form{
+    justify-content: center;
+    max-width: 300px;
+    text-align: center;
+    margin: 110px auto 0px;
+    color: black;
+    background-color:white;
+    padding: 30px 30px 30px 30px;
+    border: 1px solid black ;
+
+}
+
+form {
+    width: 100%;
+    text-align: center;
+    /* margin: 0px 0px 0px 150px; */
+    z-index: 2;
+}
+
+input {
+    width: 100%;
+    padding: 6px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button{
+    width: 40%;
+    background-color: red;
+    color: white;
+    padding: 6px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+/* Winkel ---------------------------------------------------------------*/
+
+
+
+/* Footer ------------------------------------------------------------- */
+
+.footer{
+    width: 100%;
+    display: block;
+    overflow: hidden;
+    padding: 70px 0px 5px 0px;
+    box-sizing: border-box;
+    background-color: #E5EAE6;
+    position: absolute;
+    border-style: solid;
+    border-width: 1px 0px 0px 0px;
+    z-index: 2;
+}
+
+.inner_footer{
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+.inner_footer .logo_container{
+    width: 20%;
+    float: left;
+    height: 100%;
+    display: block;
+}
+
+.inner_footer .logo_container img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 190px;
+    height: auto;
+}
+
+.inner_footer .footer_third{
+    width: 20%;
+    margin-left: 100px;
+    float: left;
+    margin-left: 0;
+    height: 100%;
+}
+
+.inner_footer{
+    margin-left: 200px;
+}
+.inner_footer .footer_third:last-child{
+    margin-right: 0;
+}
+
+.inner_footer .footer_third h1{
+    font-family: 'arial';
+    font-size: 23px;
+    color: black;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.inner_footer .footer_third a{
+    font-family: 'arial';
+    font-size: 18px;
+    color: black;
+    display: block;
+    font-weight: 200;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.inner_footer .footer_third img{
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    float: left;
+    margin-right: 2px;
+}
+
+.socials{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+}
+
+.column{
+float: left;
+display: inline-block;
+width: 50%;
+color: black;
+}
+
+.span{
+    padding-top: 80px;
+    color: black;
+    text-align: center;
+}
+
+@media(max-width: 900px) {
+    .footer .inner_footer{
+        width: 90%;
+    }
+
+    .inner_footer{
+        margin-left: 30px;
+    }
+
+    .inner_footer .logo_container,
+    .inner_footer .footer_third{
+        width: 100%;
+        margin-bottom: 30px;
+        margin-top: 4%;
+    }
+}
