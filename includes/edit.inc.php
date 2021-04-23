@@ -1,4 +1,78 @@
 <?php
+
+$serverName = "localhost";
+$dbUsername = "root";
+$dbPassword = "";
+$dbName = "flowerpower";
+
+$conn = mysqli_connect($serverName, $dbUsername, $dbPassword, $dbName);
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+
+if (isset($_POST["submit"])) {
+    
+    $voornaam = $_POST["voornaam"];
+    $tussenvoegsel = $_POST["tussenvoegsel"];
+    $achternaam = $_POST["achternaam"];
+    $email = $_POST["email"];
+    $wachtwoord = $_POST["wachtwoord"];
+    $wachtwoord2 = $_POST["wachtwoord2"];
+    if (emptyInputSignupAdmin($voornaam, $achternaam, $email, $wachtwoord, $wachtwoord2) !== false) {
+        header("location: ../adminpanel.php?error=emptyinput");
+        exit();
+    }
+    if (invalidEmail($email) !== false) {
+        header("location: ../adminpanel.php?error=invalidemail");
+        exit();
+    }
+    if (wachtwoordMatch($wachtwoord, $wachtwoord2) !== false) {
+        header("location: ../adminpanel.php?error=passwordnomatch");
+        exit();
+    }
+    if (emailExist($conn, $email) !== false) {
+        header("location: ../adminpanel.php?error=emailused");
+        exit();
+    }
+    createEmployee($conn, $voornaam, $tussenvoegsel, $achternaam, $email, $wachtwoord);
+}
+
+
+
+
+$edit = false;
+$voornaam = '';
+$tussenvoegsel = '';
+$achternaam = '';
+$email = '';
+$wachtwoord = '';
+
+if (isset($_POST['update'])) {
+    $voornaam = mysqli_real_escape_string($conn, $_POST['voornaam']);
+    $tussenvoegsel = mysqli_real_escape_string($conn, $_POST['tussenvoegsel']);
+    $achternaam = mysqli_real_escape_string($conn, $_POST['achternaam']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $wachtwoord = mysqli_real_escape_string($conn, $_POST['wachtwoord']);
+    $hashedPass = password_hash($wachtwoord, PASSWORD_DEFAULT);
+    $id = mysqli_real_escape_string($conn, $_POST['idmedewerker']);
+
+    mysqli_query($conn, "UPDATE medewerker SET voornaam='$voornaam', tussenvoegsel='$tussenvoegsel', achternaam='$achternaam', email='$email', wachtwoord='$hashedPass' WHERE idmedewerker=$id" );
+    $_SESSION['msg'] = "Medewerker is gewijzigd!";
+    header("location: ../adminpanel.php");
+    exit();
+}
+
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    mysqli_query($conn, "DELETE FROM medewerker WHERE idmedewerker=$id");
+    $_SESSION['msg'] = "Medewerker is verwijderd!";
+    header("location: ../adminpanel.php");
+    exit();
+}
+
 /* employee ---------------------------------------*/
 function emptyInputSignupAdmin($voornaam, $achternaam, $email, $wachtwoord, $wachtwoord2) {
     $result;
@@ -105,19 +179,3 @@ function loginAdmin($conn, $email, $wachtwoord) {
 }
 
 
-$edit = false;
-
-
-if (isset($_POST['update'])) {
-    // $id = mysql_real_escape_string($_POST['idmedewerker']);
-    $voornaam = mysqli_real_escape_string($conn, $_POST['voornaam']);
-    $tussenvoegsel = mysqli_real_escape_string($conn, $_POST['tussenvoegsel']);
-    $achternaam = mysqli_real_escape_string($conn, $_POST['achternaam']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $wachtwoord = mysqli_real_escape_string($conn, $_POST['wachtwoord']);
-
-    mysqli_query($conn, "UPDATE medewerker SET voornaam='$voornaam', tussenvoegsel='$tussenvoegsel', achternaam='$achternaam', email='$email', wachtwoord='$wachtwoord' WHERE idmedewerker=$id" );
-    $_SESSION['msg'] = "updated info";
-    header("location: ../adminpanel.php");
-    exit();
-}

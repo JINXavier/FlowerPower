@@ -29,7 +29,7 @@ if(!isset($_SESSION['idmedewerker']))
 
 <?php
 $mysqli = new mysqli('localhost','root','','flowerpower') or die(mysqli_error($mysqli));
-$result = $mysqli->query("SELECT * FROM medewerker") or die($mysqli->error);
+$result = $mysqli->query("SELECT * FROM factuur") or die($mysqli->error);
 ?>
 <div class="admin-panel">
     <section class="sign-up">
@@ -87,28 +87,25 @@ if (isset($_SESSION['message'])): ?>
         <table class="table">
             <thread>
                 <tr>
-                    <th>Voornaam</th>
-                    <th>Tussenvoegsel</th>
-                    <th>Achternaam</th>
-                    <th>Email</th>
-                    <th>Opties</th>
+                    <th>Datum</th>
+                    <th>Factuurnummer</th>
+                    <th>Afgehaald</th>
                 </tr>
             </thread>
     <?php
         while ($row = $result->fetch_assoc()): ?>
         <tr>
-            <td><?php echo $row['voornaam']; ?></td>
-            <td><?php echo $row['tussenvoegsel']; ?></td>
-            <td><?php echo $row['achternaam']; ?></td>
-            <td><?php echo $row['email']; ?></td>
+            <td><?php echo $row['datum']; ?></td>
+            <td><?php echo $row['factuurnummer']; ?></td>
+            <td><?php echo $row['afgehaald']; ?></td>
             <td>
-                <a href="adminpanel.php?edit=<?php echo $row['idmedewerker']; ?>"
+                <a href="adminpanel.php?edit=<?php echo $row['afgehaald']; ?>"
                     class="btn btn-info">Wijzig
                 </a>
 
-                <a href="./includes/edit.inc.php?delete=<?php echo $row['idmedewerker']; ?>"
+<!--                 <a href="./includes/edit.inc.php?delete=<?php echo $row['idmedewerker']; ?>"
                     class="btn btn-danger">Verwijder
-                </a>
+                </a> -->
             </td>
         </tr>
         <?php endwhile; ?>

@@ -93,6 +93,9 @@ nav{
 .toggle .line3{
     transform: rotate(45deg) translate(-5px,-6px);
 }
+/* ADMINPANEL---------------------------------------------------------------*/
+
+
 /* INDEX ------------------------------------------------------------------*/
 
 .bg{
@@ -110,7 +113,6 @@ nav{
 
 .wrapper {
     display: grid;
-    
     align-items: center;
     position: relative;
     grid-template-columns: 1fr 1fr;
