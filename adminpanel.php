@@ -72,16 +72,8 @@ $result = $mysqli->query("SELECT * FROM medewerker") or die($mysqli->error);
     }
 }
     ?>
-    <?php
-if (isset($_SESSION['message'])): ?>
-<?$_SESSION['msg_type']?>
-<?php
-    echo $_SESSION['message'];
-    unset($_SESSION['message']);
-?>
 </div>
-<?php endif ?>
-</div>
+
 
 <div class="row justify-content-center">
         <table class="table">

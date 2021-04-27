@@ -47,16 +47,17 @@ $result = $mysqli->query("SELECT * FROM artikel") or die($mysqli->error);
     </section>
     </br>
     <?php
-if (isset($_SESSION['message'])): ?>
-<?$_SESSION['msg_type']?>
-<?php
-    echo $_SESSION['message'];
-    unset($_SESSION['message']);
-?>
+    if (isset($_GET["error"])) {
+        if ($_GET["error"] == "none") {
+        echo"<b>Artikel is gewijzigd!</b>";
+    } else if ($_GET["error"] == "deleted") {
+        echo"<b>Artikel is verwijderd!</b>";
+    }
+}
+    ?>
+    <div>
 </div>
-<?php endif ?>
-</div>
-
+<br>
 <div class="row justify-content-center">
         <table class="table">
             <thread>

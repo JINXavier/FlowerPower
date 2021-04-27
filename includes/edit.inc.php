@@ -60,7 +60,6 @@ if (isset($_POST['update'])) {
     $id = mysqli_real_escape_string($conn, $_POST['idmedewerker']);
 
     mysqli_query($conn, "UPDATE medewerker SET voornaam='$voornaam', tussenvoegsel='$tussenvoegsel', achternaam='$achternaam', email='$email', wachtwoord='$hashedPass' WHERE idmedewerker=$id" );
-    $_SESSION['msg'] = "Medewerker is gewijzigd!";
     header("location: ../adminpanel.php");
     exit();
 }
@@ -68,7 +67,6 @@ if (isset($_POST['update'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     mysqli_query($conn, "DELETE FROM medewerker WHERE idmedewerker=$id");
-    $_SESSION['msg'] = "Medewerker is verwijderd!";
     header("location: ../adminpanel.php");
     exit();
 }

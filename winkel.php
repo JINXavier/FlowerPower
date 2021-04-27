@@ -21,9 +21,9 @@ include("layout/navbar.php")
                      <div class="col-sm-3" style="margin-top:12px; float:left;">  
                           <div style="border:1px solid #333; border-radius:15px; padding:16px; height:450px;" align="center">  
                                <img src="images/products/<?php echo $row["plaatje"]; ?>" class="img-fluid" /><br />  
-                               <h8 class="text-info"><?php echo $row["omschrijving"]; ?></h8>
                                <h4 class="text-info"><?php echo $row["artikelnaam"]; ?></h4>  
-                               <h4 class="text-danger">€ <?php echo $row["prijs"]; ?></h4>  
+                               <h8 class="text-info"><?php echo $row["omschrijving"]; ?></h8>
+                               <h4>€ <?php echo $row["prijs"]; ?></h4>  
                                <input type="text" name="quantity" id="quantity<?php echo $row["idartikel"]; ?>" class="form-control" value="1" />  
                                <input type="hidden" name="hidden_name" id="name<?php echo $row["idartikel"]; ?>" value="<?php echo $row["artikelnaam"]; ?>" />  
                                <input type="hidden" name="hidden_price" id="price<?php echo $row["idartikel"]; ?>" value="<?php echo $row["prijs"]; ?>" />  
@@ -43,22 +43,22 @@ include("layout/navbar.php")
  <script>  
  $(document).ready(function(data){  
       $('.add_to_cart').click(function(){  
-           var product_id = $(this).attr("id");  
-           var product_name = $('#name'+product_id).val();  
-           var product_price = $('#price'+product_id).val();  
-           var product_quantity = $('#quantity'+product_id).val();  
+           var productID = $(this).attr("id");  
+           var productName = $('#name'+productID).val();  
+           var productPrice = $('#price'+productID).val();  
+           var productQuantity = $('#quantity'+productID).val();  
            var action = "add";  
-           if(product_quantity > 0)  
+           if(productQuantity > 0)  
            {  
                 $.ajax({  
-                     url:"action.php",  
+                     url:"./includes/winkel.inc.php",  
                      method:"POST",  
                      dataType:"json",  
                      data:{  
-                          product_id:product_id,   
-                          product_name:product_name,   
-                          product_price:product_price,   
-                          product_quantity:product_quantity,   
+                          productID:productID,   
+                          productName:productName,   
+                          productPrice:productPrice,   
+                          productQuantity:productQuantity,   
                           action:action  
                      },  
                      success:function(data)  
@@ -71,7 +71,7 @@ include("layout/navbar.php")
            }  
            else  
            {  
-                alert("Please Enter Number of Quantity")  
+                alert("Kies het aantal!")  
            }  
       });   
  });  

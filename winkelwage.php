@@ -24,14 +24,14 @@ include("layout/navbar.php")
                 {                                               
             ?>  
             <tr>  
-                <td><?php echo $values["product_name"]; ?></td>  
-                <td><input type="text" name="quantity[]" id="quantity<?php echo $values["product_id"]; ?>" value="<?php echo $values["product_quantity"]; ?>" data-product_id="<?php echo $values["product_id"]; ?>" class="form-control quantity" /></td>  
-                <td align="right">€ <?php echo $values["product_price"]; ?></td>  
-                <td align="right">€ <?php echo number_format($values["product_quantity"] * $values["product_price"], 2); ?></td>  
-                <td><button name="delete" class="btn btn-danger btn-block delete" id="<?php echo $values["product_id"]; ?>">Verwijder</button></td>  
+                <td><?php echo $values["productName"]; ?></td>  
+                <td><input type="text" name="quantity[]" id="quantity<?php echo $values["productID"]; ?>" value="<?php echo $values["productQuantity"]; ?>" data-productID="<?php echo $values["productID"]; ?>" class="form-control quantity" /></td>  
+                <td align="right">€ <?php echo $values["productPrice"]; ?></td>  
+                <td align="right">€ <?php echo number_format($values["productQuantity"] * $values["productPrice"], 2); ?></td>  
+                <td><button name="delete" class="btn btn-danger btn-block delete" id="<?php echo $values["productID"]; ?>">Verwijder</button></td>  
             </tr>  
             <?php  
-                    $total = $total + ($values["product_quantity"] * $values["product_price"]);  
+                    $total = $total + ($values["productQuantity"] * $values["productPrice"]);  
                 }  
             ?>  
             <tr>  
@@ -41,8 +41,8 @@ include("layout/navbar.php")
             </tr>  
             <tr>  
                     <td colspan="5" align="center">  
-                        <form method="POST" action="cart.php">  
-                        <input type="submit" name="place_order" class="btn btn-warning" value="Plaats bestelling" />  
+                        <form method="POST" action="checkout.php">  
+                        <input type="submit" name="placeOrder" class="btn btn-warning" value="Plaats bestelling" />  
                         </form>  
                     </td>  
             </tr>  
@@ -57,15 +57,15 @@ include("layout/navbar.php")
 <script>
 $(document).ready(function(data){  
         $(document).on('click', '.delete', function(){  
-           var product_id = $(this).attr("id");  
+           var productID = $(this).attr("id");  
            var action = "remove";  
            if(confirm("Weet u zeker dat u dit product wil verwijderen?"))  
            {  
                 $.ajax({  
-                     url:"action.php",  
+                     url:"./includes/winkel.inc.php",  
                      method:"POST",  
                      dataType:"json",  
-                     data:{product_id:product_id, action:action},  
+                     data:{productID:productID, action:action},  
                      success:function(data){  
                           $('#order_table').html(data.order_table);  
                           $('.badge').text(data.cart_item);  
@@ -78,16 +78,16 @@ $(document).ready(function(data){
            }  
       });  
       $(document).on('keyup', '.quantity', function(){  
-           var product_id = $(this).data("product_id");  
+           var productID = $(this).data("productID");  
            var quantity = $(this).val();  
            var action = "quantity_change";  
            if(quantity != '')  
            {  
                 $.ajax({  
-                     url :"action.php",  
+                     url :"../includes/winkel.inc.php",  
                      method:"POST",  
                      dataType:"json",  
-                     data:{product_id:product_id, quantity:quantity, action:action},  
+                     data:{productID:productID, quantity:quantity, action:action},  
                      success:function(data){  
                           $('#order_table').html(data.order_table);  
                      }  

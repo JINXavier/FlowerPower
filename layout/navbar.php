@@ -6,10 +6,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/adminstyle.css">
     </head>
@@ -25,7 +26,7 @@ textarea {
             </div>
             <ul class="nav-links">
                 <li>
-                    <a href="./OverOns.php">Over ons</a>
+                    <a href="./overons.php">Over ons</a>
                 </li>
 
                 <?php
@@ -35,8 +36,7 @@ textarea {
                         echo "<li><a href='adminpanel.php'>Admin Panel</a></li>";
                         echo "<li><a href='includes/logout.inc.php'>Log out</a></li>";
                     } else {
-                        echo "<li><a href='SignUp.php'>Registreer</a></li>";
-                        echo "<li><a href='Login.php'>Log in</a></li>";
+                        echo "<li><a href='login.php'>Log in</a></li>";
                     }
                 ?>
                 <li>

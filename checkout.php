@@ -8,7 +8,7 @@ $conn = mysqli_connect("localhost", "root", "", "flowerpower");
 if(!isset($_SESSION['idklant']))
 {
     // not logged in
-    header('Location: SignUp.php');
+    header('Location: login.php');
     exit();
 }
 ?>
@@ -24,10 +24,10 @@ if(!isset($_SESSION['idklant']))
            <br />  
            <div class="container" style="width:800px;">  
                 <?php  
-                if(isset($_POST['place_order'])){
+                if(isset($_POST['placeOrder'])){
                   $insert_order = "
                   INSERT INTO factuur(idklant, datum, factuurnummer, afgehaald, idmedewerker, idwinkel)
-                  VALUES('{$_SESSION['idklant']}', '".date('Y-m-d')."', '".time()."', '0', '1', '1')
+                  VALUES('{$_SESSION['idklant']}', '".date('Y-m-d')."', '".time()."', 'Nog niet afgehaald', '1', '1')
                   ";
                   $order_id = "";
                   if(mysqli_query($conn, $insert_order)){
@@ -39,19 +39,21 @@ if(!isset($_SESSION['idklant']))
                   foreach($_SESSION["shopping_cart"] as $keys => $values){
                     $order_details = "
                     INSERT INTO artikel_has_factuur (idfactuur, artikelnaam, artikelprijs, aantal) 
-                    VALUES('".$order_id."', '".$values["product_name"]."', '".$values["product_price"]."', '".$values["product_quantity"]."')
+                    VALUES('".$order_id."', '".$values["productName"]."', '".$values["productPrice"]."', '".$values["productQuantity"]."')
                     ";
                     if(mysqli_multi_query($conn, $order_details)){
                       $lastcheck = True;
                       unset($_SESSION["shopping_cart"]);  
                       echo '<script>alert("Uw bestelling is geplaatst!")</script>';  
-                      echo '<script>window.location.href="cart.php"</script>';
+                      echo '<script>window.location.href="checkout.php"</script>';
                     }
                   }
                 }
                 if(isset($_SESSION["order_id"])){
                   $customer_details = '';
                   $order_details = '';
+                  $factuurnummer = '';
+                  $order_number = '';
                   $total = 0;
                   $query = '
                   SELECT * FROM factuur
@@ -69,7 +71,11 @@ if(!isset($_SESSION['idklant']))
                           <p>'.$row["postcode"].', '.$row["plaats"].' </p>
                           <p>'.$row["telefoon"].'</p>    
                           <p>'.$row["email"].'</p>  
-                          ';  
+
+                          '; 
+                          $order_number = '
+                            <h5 align="center">Factuurnummer: '.$row["factuurnummer"].'</h5>
+                          '; 
                           $order_details .= "  
                                <tr>  
                                     <td>".$row["artikelnaam"]."</td>  
@@ -81,17 +87,17 @@ if(!isset($_SESSION['idklant']))
                           $total = $total + ($row["aantal"] * $row["artikelprijs"]);  
                      }  
                      echo '  
-                     <h3 align="center">Factuur num.'.$_SESSION["order_id"].'</h3>  
+                    <tr>'.$order_number.'</tr>
                      <div class="table-responsive">  
                           <table class="table">  
                                <tr>  
-                                    <td><label>Klant gegevens</label></td>  
+                                    <td><b>Klant gegevens</b></td>  
                                </tr>  
                                <tr>  
                                     <td>'.$customer_details.'</td>  
                                </tr>  
                                <tr>  
-                                    <td><label>Bestelling overzicht</label></td>  
+                                    <td><b>Bestelling overzicht</b></td>  
                                </tr>  
                                <tr>  
                                     <td>  

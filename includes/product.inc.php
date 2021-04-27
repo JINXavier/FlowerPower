@@ -55,16 +55,14 @@ if (isset($_POST['update'])) {
     move_uploaded_file($_FILES['plaatje']['tmp_name'], $target);
     
     mysqli_query($conn, "UPDATE artikel SET plaatje='$plaatjeNaam', artikelnaam='$artikelnaam', omschrijving='$omschrijving', prijs='$prijs' WHERE idartikel=$id" );
-    $_SESSION['msg'] = "Artikel is gewijzigd!";
-    header("location: ../product.php");
+    header("location: ../product.php?error=none");
     exit();
 }
 
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     mysqli_query($conn, "DELETE FROM artikel WHERE idartikel=$id");
-    $_SESSION['msg'] = "Artikel is verwijderd!";
-    header("location: ../product.php");
+    header("location: ../product.php?error=deleted");
     exit();
 }
 

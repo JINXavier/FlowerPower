@@ -3,6 +3,7 @@
     padding: 0;
     list-style: none;
     text-decoration: none;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Navbar -------------------------------------------------------- */
@@ -93,7 +94,6 @@ nav{
 .toggle .line3{
     transform: rotate(45deg) translate(-5px,-6px);
 }
-/* ADMINPANEL---------------------------------------------------------------*/
 
 
 /* INDEX ------------------------------------------------------------------*/
@@ -262,7 +262,6 @@ input {
 }
 
 button{
-    width: 40%;
     background-color: red;
     color: white;
     padding: 6px 20px;
@@ -272,8 +271,22 @@ button{
     cursor: pointer;
 }
 
-/* Winkel ---------------------------------------------------------------*/
-
+.register:link {
+  color: black;
+  text-decoration: none;
+}
+.register:visited {
+  color: black;
+  text-decoration: none;
+}
+.register:hover {
+  color: red;
+  text-decoration: none;
+}
+a:hover {
+  color: red;
+  text-decoration: none;
+}
 
 
 /* Footer ------------------------------------------------------------- */

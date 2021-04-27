@@ -1,6 +1,9 @@
 <?php
 include("layout/navbar.php")
 ?>
+<style>
+
+</style>
 <div class="bg1"></div>
 <div class="signup-form">
     <section class="sign-up">
@@ -11,6 +14,8 @@ include("layout/navbar.php")
     <button type="submit" name="submit">Login</button>
     </form>
     </section>
+    <br>
+        <h6><a class="register" href="signup.php">Nog geen account?</a></h6>
     <?php
     if (isset($_GET["error"])) {
         if ($_GET["error"] == "emptyinput") {
